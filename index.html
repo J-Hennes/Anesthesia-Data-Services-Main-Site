@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7DDF16">
+<title>Anesthesia Data Services, LLC</title>
+<style>
+  :root{
+    --blue:#2CB4DD;
+    --orange:#ED8F16;
+    --green:#7DDF16;
+    --deep:#0D1B22;
+    --ink:#122027;
+    --ink-soft:#42555E;
+    --surface:#FFFFFF;
+    --surface-alt:#F5FAFC;
+    --line:#DDEAF0;
+    --radius:14px;
+    --max:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--surface);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.6em;
+    font-family:ui-monospace,'Courier New',monospace;
+    font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
+  .btn{
+    display:inline-block;padding:12px 24px;border-radius:999px;
+    font-weight:700;font-size:.93rem;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  .btn-green{background:var(--green);color:var(--deep)}
+  .btn-green:hover{box-shadow:0 6px 18px rgba(125,223,22,.4)}
+  .btn-orange{background:var(--orange);color:var(--deep)}
+  .btn-orange:hover{box-shadow:0 6px 18px rgba(237,143,22,.4)}
+  .btn-outline{border:1.5px solid rgba(255,255,255,.4);color:#fff}
+  .btn-outline:hover{border-color:var(--green);color:var(--green)}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+  .brand-mark{width:36px;height:36px;border-radius:10px;background:var(--deep);display:grid;place-items:center;flex-shrink:0}
+  .nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+  .nav-links a:not(.btn){text-decoration:none;color:var(--ink-soft);font-weight:600;font-size:.92rem}
+  .nav-links a:not(.btn):hover{color:var(--ink)}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--deep);color:#fff;position:relative;overflow:hidden}
+  .hero .wrap{padding:96px 24px 130px;position:relative;z-index:2}
+  .hero .eyebrow{color:var(--green)}
+  .hero h1{
+    font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.12;letter-spacing:-.02em;
+    margin:18px 0 22px;max-width:17ch;
+  }
+  .hero h1 em{font-style:normal;color:var(--green)}
+  .hero p{max-width:58ch;color:#B9CDD6;font-size:1.08rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero-tags{margin-top:44px;display:flex;gap:10px;flex-wrap:wrap}
+  .tag{
+    font-family:ui-monospace,monospace;font-size:.72rem;letter-spacing:.06em;
+    padding:6px 12px;border-radius:999px;border:1px solid;
+  }
+  .tag-green{color:var(--green);border-color:rgba(125,223,22,.35)}
+  .tag-blue{color:var(--blue);border-color:rgba(44,180,221,.35)}
+  .tag-orange{color:var(--orange);border-color:rgba(237,143,22,.35)}
+  /* signature: tri-color vitals waveform */
+  .vitals{position:absolute;left:0;right:0;bottom:0;height:100px;opacity:.9}
+  .vitals path{fill:none;stroke-width:2}
+  .vitals .w-blue{stroke:var(--blue);filter:drop-shadow(0 0 6px rgba(44,180,221,.6))}
+  .vitals .w-orange{stroke:var(--orange);filter:drop-shadow(0 0 6px rgba(237,143,22,.6))}
+  .vitals .w-green{stroke:var(--green);filter:drop-shadow(0 0 6px rgba(125,223,22,.6))}
+
+  /* ---------- About cards ---------- */
+  .about{background:var(--surface-alt);padding:88px 0}
+  .section-head{max-width:640px;margin-bottom:48px}
+  .section-head .eyebrow{color:var(--blue)}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);letter-spacing:-.015em;margin-top:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 28px;display:flex;flex-direction:column;gap:14px;
+    transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow:0 1px 3px rgba(13,27,34,.04);
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(13,27,34,.10)}
+  .card-green{border-top:4px solid var(--green)}
+  .card-blue{border-top:4px solid var(--blue)}
+  .card-orange{border-top:4px solid var(--orange)}
+  .card-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px}
+  .card-green .card-icon{background:rgba(125,223,22,.12)}
+  .card-blue .card-icon{background:rgba(44,180,221,.12)}
+  .card-orange .card-icon{background:rgba(237,143,22,.12)}
+  .card h3{font-size:1.18rem}
+  .card p{color:var(--ink-soft);font-size:.96rem;line-height:1.65;flex:1}
+  .card a{font-weight:700;font-size:.9rem;text-decoration:none}
+  .card a:hover{text-decoration:underline}
+  .card-green a{color:var(--green)}
+  .card-blue a{color:var(--blue)}
+  .card-orange a{color:var(--orange)}
+
+  /* ---------- CTA band ---------- */
+  .cta-section{padding:72px 0}
+  .band{
+    background:linear-gradient(105deg,var(--deep) 0%,#14313D 100%);
+    color:#fff;border-radius:16px;padding:50px 44px;
+    display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+    position:relative;overflow:hidden;
+  }
+  .band-rule{position:absolute;top:0;left:0;right:0;height:4px;display:flex}
+  .band-rule span{flex:1}
+  .band h2{font-size:1.6rem;letter-spacing:-.01em;margin-bottom:8px}
+  .band p{color:#B9CDD6;max-width:48ch}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--deep);color:#8FA6B0;padding:36px 0;font-size:.86rem}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .dots{display:flex;gap:6px}
+  .dots span{width:10px;height:10px;border-radius:50%}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:720px){
+    .nav-links{gap:16px}
+    .nav-links .nav-text{display:none}
+    .about,.cta-section{padding:64px 0}
+    .band{padding:38px 28px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Anesthesia Data Services home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M2 12h4l2.5-6 3.5 12 3-8 1.5 2H22" stroke="#7DDF16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Anesthesia Data Services</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links">
+        <li class="nav-text"><a href="#about">About</a></li>
+        <li class="nav-text"><a href="#what-we-can-do">What We Can Do</a></li>
+        <li><a class="btn btn-green" href="#what-we-can-do">See what we can do!!</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Anesthesia Data Services, LLC</span>
+      <h1>Operational data tools built <em>for anesthesia</em>, by anesthesiologists.</h1>
+      <p>Helping anesthesia practices and surgical facilities capture, process, and share operational data — from coverage requests to provider pay.</p>
+      <div class="hero-actions">
+        <a class="btn btn-green" href="#what-we-can-do">See what we can do!!</a>
+        <a class="btn btn-outline" href="#about">Meet our team</a>
+      </div>
+      <div class="hero-tags" aria-hidden="true">
+        <span class="tag tag-green">PROVIDER PAY</span>
+        <span class="tag tag-blue">FACILITY INVOICING</span>
+        <span class="tag tag-orange">COVERAGE REQUESTS</span>
+        <span class="tag tag-green">SCHEDULING</span>
+      </div>
+    </div>
+    <svg class="vitals" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+      <path class="w-blue"   d="M0,60 L90,60 L110,60 L122,26 L138,90 L150,46 L162,60 L240,60"/>
+      <path class="w-orange" d="M240,60 L330,60 L350,60 L362,26 L378,90 L390,46 L402,60 L480,60"/>
+      <path class="w-green"  d="M480,60 L570,60 L590,60 L602,26 L618,90 L630,46 L642,60 L720,60"/>
+      <path class="w-blue"   d="M720,60 L810,60 L830,60 L842,26 L858,90 L870,46 L882,60 L960,60"/>
+      <path class="w-orange" d="M960,60 L1050,60 L1070,60 L1082,26 L1098,90 L1110,46 L1122,60 L1200,60"/>
+      <path class="w-green"  d="M1200,60 L1290,60 L1310,60 L1322,26 L1338,90 L1350,46 L1362,60 L1440,60"/>
+    </svg>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Who we are</span>
+        <h2>Built by the people who work in the OR</h2>
+      </div>
+      <div class="cards">
+
+        <article class="card card-green">
+          <span class="card-icon" aria-hidden="true">🎯</span>
+          <h3>Our Mission</h3>
+          <p>Anesthesia Data Services, LLC (ADS) is focused on helping anesthesia practices and surgical facilities capture, process, and share operational data. Our goal is to create the data management tools needed to execute on complex contractual relationships such as revenue guarantee and locums based models. We are also building tools to enhance communication between anesthesia groups and their surgical facility partners.</p>
+          <a href="#what-we-can-do">See what we can do!! →</a>
+        </article>
+
+        <article class="card card-blue">
+          <span class="card-icon" aria-hidden="true">🩺</span>
+          <h3>Our Team</h3>
+          <p>We are practicing anesthesiologists working with experienced software developers to create an online application built specifically for the anesthesia service market. Our solutions are created using both established web-based platforms and new proprietary tools.</p>
+          <a href="#what-we-can-do">See what we can do!! →</a>
+        </article>
+
+        <article class="card card-orange">
+          <span class="card-icon" aria-hidden="true">⚙️</span>
+          <h3>What We Can Do</h3>
+          <p>Our software allows providers to capture daily work information and calculates provider payment and facility invoicing based on defined contracts. ADS also allows surgical facilities to submit coverage requests and daily schedules, while anesthesia groups can use the platform to create schedules, assign providers, and collect provider's daily work information.</p>
+          <a href="#what-we-can-do">See what we can do!! →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BAND ============ -->
+  <section class="cta-section" id="what-we-can-do">
+    <div class="wrap">
+      <div class="band">
+        <div class="band-rule" aria-hidden="true">
+          <span style="background:var(--blue)"></span>
+          <span style="background:var(--orange)"></span>
+          <span style="background:var(--green)"></span>
+        </div>
+        <div>
+          <h2>See what we can do!!</h2>
+          <p>Scheduling, coverage requests, provider payment, facility invoicing, and more — built specifically for the anesthesia service market.</p>
+        </div>
+        <a class="btn btn-orange" href="#top">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Anesthesia Data Services, LLC — All Rights Reserved.</span>
+    <span class="dots" aria-hidden="true">
+      <span style="background:var(--blue)"></span>
+      <span style="background:var(--orange)"></span>
+      <span style="background:var(--green)"></span>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
