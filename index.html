@@ -148,6 +148,47 @@
     .about,.cta-section{padding:64px 0}
     .band{padding:38px 28px}
   }
+/* ---------- Image Carousel ---------- */
+  .carousel {
+    position: relative;
+    width: 480px;
+    height: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+  .carousel img.active {
+    opacity: 1;
+  }
+  .dots {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transition: background 0.3s ease;
+  }
+  .dot.active {
+    background: #ffffff;
+  }
 </style>
 </head>
 <body>
@@ -178,6 +219,19 @@
       <span class="eyebrow">Anesthesia Data Services, LLC</span>
       <h1><em>collaborative operations</em> for peri-operative teams</h1>
       <p>Helping anesthesia practices and surgical facilities capture, process, and share operational data — from coverage requests to provider pay.</p>
+      
+      <div class="carousel" id="carousel">
+  <img src="https://picsum.photos/id/1015/480/320" class="active" alt="Slide 1">
+  <img src="https://picsum.photos/id/1025/480/320" alt="Slide 2">
+  <img src="https://picsum.photos/id/1043/480/320" alt="Slide 3">
+  <img src="https://picsum.photos/id/1069/480/320" alt="Slide 4">
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
       <div class="hero-actions">
         <a class="btn btn-green" href="#what-we-can-do">See what we can do!!</a>
         <a class="btn btn-outline" href="#about">Meet our team</a>
@@ -211,7 +265,7 @@
         <article class="card card-green">
           <span class="card-icon" aria-hidden="true">🎯</span>
           <h3>Our Mission</h3>
-          <p>Anesthesia Data Services, LLC (ADS) is focused on helping anesthesia practices and surgical facilities capture, process, and share operational data. Our goal is to create the data management tools needed to execute on complex contractual relationships such as revenue guarantee and locums based models. We are also building tools to enhance communication between anesthesia groups and their surgical facility partners.</p>
+          <p>Anesthesia Data Services, LLC (ADS) is focused on helping anesthesia practices and surgical facilities OPERATE BETTER. Our tools help groups and facilities manage staff, coordinate schedules, communicate effeciently, and execute on evolving and complicated service contracts, including STIPENDS and LOCUMS based agreements.</p>
           <a href="#what-we-can-do">See what we can do!! →</a>
         </article>
 
@@ -263,6 +317,26 @@
     </span>
   </div>
 </footer>
+
+/* Image Carousel Script  */
+<script>
+  const images = document.querySelectorAll('.carousel img');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0;
+
+  function showSlide(index) {
+    images.forEach((img, i) => img.classList.toggle('active', i === index));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  }
+
+  setInterval(() => {
+    current = (current + 1) % images.length;
+    showSlide(current);
+  }, 4000);
+</script>
+/* END Coursel Script */
+
+
 
 </body>
 </html>
