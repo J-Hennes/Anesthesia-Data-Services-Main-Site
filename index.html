@@ -321,50 +321,70 @@
   <h2 class="text-center mb-3">See what we can do!!</h2>
   
   <!-- 3 columns on desktop (md), 1 column on mobile -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
-    
-    <!-- Item 1: Blue -->
-    <div class="col">
-      <div class="d-flex align-items-center">
-        <span class="fs-4 me-2" style="color: var(--blue);">●</span>
-        <p class="mb-0">Scheduling</p>
-      </div>
-    </div>
-    
-    <!-- Item 2: Orange -->
-    <div class="col">
-      <div class="d-flex align-items-center">
-        <span class="fs-4 me-2" style="color: var(--orange);">●</span>
-        <p class="mb-0">Coverage requests</p>
-      </div>
-    </div>
-    
-    <!-- Item 3: Green -->
-    <div class="col">
-      <div class="d-flex align-items-center">
-        <span class="fs-4 me-2" style="color: var(--green);">●</span>
-        <p class="mb-0">Provider payment</p>
-      </div>
-    </div>
-    
-    <!-- Item 4: Blue -->
-    <div class="col">
-      <div class="d-flex align-items-center">
-        <span class="fs-4 me-2" style="color: var(--blue);">●</span>
-        <p class="mb-0">Facility invoicing</p>
-      </div>
-    </div>
-    
-    <!-- Item 5: Orange -->
-    <div class="col">
-      <div class="d-flex align-items-center">
-        <span class="fs-4 me-2" style="color: var(--orange);">●</span>
-        <p class="mb-0">And more — built specifically for the anesthesia service market.</p>
-      </div>
-    </div>
-
-  </div>
+  <div class="services-container">
+  <h2>See what we can do!!</h2>
+  
+  <ul class="responsive-bullet-list">
+    <li class="bullet-blue"><span>Scheduling</span></li>
+    <li class="bullet-orange"><span>Coverage requests</span></li>
+    <li class="bullet-green"><span>Provider payment</span></li>
+    <li class="bullet-blue"><span>Facility invoicing</span></li>
+    <li class="bullet-orange"><span>And more — built specifically for the anesthesia service market.</span></li>
+  </ul>
 </div>
+
+<style>
+  /* Container layout */
+  .services-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .services-container h2 {
+    margin-bottom: 20px;
+  }
+
+  /* Core List Reset */
+  .responsive-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr; /* 1 column for mobile */
+    gap: 15px;
+  }
+
+  /* List Item Flexbox (Forces bullet and text to stay on the same line) */
+  .responsive-bullet-list li {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    white-space: normal;
+  }
+
+  /* Custom Bullets using Pseudo-elements */
+  .responsive-bullet-list li::before {
+    content: "•";
+    font-size: 28px;
+    line-height: 1;
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevents bullet from squeezing */
+  }
+
+  /* Color Alternation */
+  .responsive-bullet-list .bullet-blue::before { color: var(--blue, #007bff); }
+  .responsive-bullet-list .bullet-orange::before { color: var(--orange, #ffc107); }
+  .responsive-bullet-list .bullet-green::before { color: var(--green, #28a745); }
+
+  /* Desktop Viewport Rule */
+  @media (min-width: 768px) {
+    .responsive-bullet-list {
+      grid-template-columns: repeat(3, 1fr) !important; /* Forces exactly 3 columns */
+    }
+  }
+</style>
+
  <!-- END of 3 Columns -->
         
         <a class="btn btn-orange" href="mailto:info@anesthesiadataservices.com">Get in touch</a>
