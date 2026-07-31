@@ -153,6 +153,12 @@
     .hero-grid .hero-text{margin-bottom:18px}
     .carousel{height:220px}
   }
+  
+  .brand-short{display:none}
+  @media (max-width:720px){
+  .brand-full{display:none}
+  .brand-short{display:inline}
+}
 /* ---------- Image Carousel ---------- */
   .carousel {
     position: relative;
@@ -257,7 +263,10 @@
       <span class="brand-mark" aria-hidden="true">
         <img src="logo.png" alt="ADS logo" width="36" height="36">
       </span>
-      <span style="display: block; text-align: center;">Anesthesia Data Services</span>
+      <span class="brand-name">
+        <span class="brand-full">Anesthesia Data Services</span>
+        <span class="brand-short">ADS</span>
+      </span>
     </a>
     <nav aria-label="Main navigation">
       <ul class="nav-links">
