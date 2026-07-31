@@ -195,6 +195,58 @@
   .dot.active {
     background: #ffffff;
   }
+
+/* The styling below is for the three columns of bullets at the bottom of the page */
+  /* Container layout */
+  .services-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .services-container h2 {
+    margin-bottom: 20px;
+  }
+
+  /* Core List Reset */
+  .responsive-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr; /* 1 column for mobile */
+    gap: 15px;
+  }
+
+  /* List Item Flexbox (Forces bullet and text to stay on the same line) */
+  .responsive-bullet-list li {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    white-space: normal;
+  }
+
+  /* Custom Bullets using Pseudo-elements */
+  .responsive-bullet-list li::before {
+    content: "•";
+    font-size: 40px;
+    line-height: 1;
+    margin-right: 10px;
+    flex-shrink: 0; /* Prevents bullet from squeezing */
+  }
+
+  /* Color Alternation */
+  .responsive-bullet-list .bullet-blue::before { color: var(--blue, #007bff); }
+  .responsive-bullet-list .bullet-orange::before { color: var(--orange, #ffc107); }
+  .responsive-bullet-list .bullet-green::before { color: var(--green, #28a745); }
+
+  /* Desktop Viewport Rule */
+  @media (min-width: 768px) {
+    .responsive-bullet-list {
+      grid-template-columns: repeat(3, 1fr) !important; /* Forces exactly 3 columns */
+    }
+  }
+/* End of styling for the three columns of bullets at the bottom of the screen */
 </style>
 </head>
 <body>
@@ -300,7 +352,7 @@
         <article class="card card-green">
           <span class="card-icon" aria-hidden="true">⚙️</span>
           <h3>Our Solution</h3>
-          <p>The heart of the ADS platform is our dynamic scheduling process that updates coverage schedules as facilities enter their specific needs. Providers can be assigned, work information can be captured, and provider pay and facility invoices can all be easily calculated.  The platform allows for a collaboration that <strong style="color:var(--green)">DRIVES EFFECIENCES</strong> for groups and facilities.</p>
+          <p>The heart of the ADS platform is our dynamic scheduling process that updates coverage schedules as facilities enter their specific needs. Providers can be assigned, work information can be captured, and provider pay and facility invoices can all be easily calculated.  The platform allows for a collaboration that <strong style="color:var(--green)">DRIVES EFFECIENCES</strong> for both groups and facilities.</p>
           <a href="#what-we-can-do">See what we can do!! →</a>
         </article>
 
@@ -318,7 +370,7 @@
           <span style="background:var(--green)"></span>
         </div>
         <div class="container my-5">
-  <h2 class="text-center mb-3">See what we can do!!</h2>
+  <h2 class="text-center mb-3" style="text-align: center; width: 100%;">See what we can do!!</h2>
   
   <!-- 3 columns on desktop (md), 1 column on mobile -->
   <div class="services-container">
@@ -335,59 +387,6 @@
     <li class="bullet-green"><span>Communicate facility-wide with built-in text and click to call</span></li>
   </ul>
 </div>
-
-<style>
-  /* Container layout */
-  .services-container {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .services-container h2 {
-    margin-bottom: 20px;
-  }
-
-  /* Core List Reset */
-  .responsive-bullet-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr; /* 1 column for mobile */
-    gap: 15px;
-  }
-
-  /* List Item Flexbox (Forces bullet and text to stay on the same line) */
-  .responsive-bullet-list li {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    white-space: normal;
-  }
-
-  /* Custom Bullets using Pseudo-elements */
-  .responsive-bullet-list li::before {
-    content: "•";
-    font-size: 40px;
-    line-height: 1;
-    margin-right: 10px;
-    flex-shrink: 0; /* Prevents bullet from squeezing */
-  }
-
-  /* Color Alternation */
-  .responsive-bullet-list .bullet-blue::before { color: var(--blue, #007bff); }
-  .responsive-bullet-list .bullet-orange::before { color: var(--orange, #ffc107); }
-  .responsive-bullet-list .bullet-green::before { color: var(--green, #28a745); }
-
-  /* Desktop Viewport Rule */
-  @media (min-width: 768px) {
-    .responsive-bullet-list {
-      grid-template-columns: repeat(3, 1fr) !important; /* Forces exactly 3 columns */
-    }
-  }
-</style>
-
  <!-- END of 3 Columns -->
         
         <a class="btn btn-orange" href="mailto:info@anesthesiadataservices.com">Get in touch</a>
